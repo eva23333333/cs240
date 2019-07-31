@@ -1,0 +1,27 @@
+
+
+
+
+app.bin: 
+        gcc -o app.bin main.o read_vecs.o -static -L /homes/qin39/Desktop/mylab3/vsubsum -l calcvec 
+
+main.o: main.c vsubsum.h
+        gcc -c main.c
+
+read_vecs.o: read_vecs.c vsubsum.h
+        gcc -c read_vecs.c
+
+calc_diff.o: calc_diff.c  vsubsum.h
+        gcc -c calc_diff.c
+
+calc_sum.o: calc_sum.c  vsubsum.h
+        gcc -c calc_sum.c
+
+calc_max.o:  calc_max.c vsubsum.h
+        gcc -c calc_max.c
+
+calc_min.o: calc_min.c vsubsum.h
+        gcc -c calc_min.c
+
+
+

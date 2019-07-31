@@ -1,0 +1,25 @@
+CC = gcc
+OBJ = main.o read_vecs.o  calc_diff.o calc_sum.o calc_max.o calc_min.o 
+CFLAGS = -l
+all: libcalcvec.so main.bin
+
+main.bin:main.o read_vecs.o $(OBJ)
+	$(CC) -o main.bin  main.o read_vecs.o  -L . $(CFLAGS) calcvec
+libcalcvec.so:calc_min.o calc_max.o calc_diff.o calc_sum.o
+	$(CC) -shared -o libcalcvec.so calc_min.o calc_max.o calc_diff.o calc_sum.o
+       export LD_LIBRARY_PATH=.
+
+main.o: main.c vsubsum.h
+	$(CC) -c -fPIC main.c
+read_vecs.o: read_vecs.c vsubsum.h
+	$(CC) -c -fPIC read_vecs.c
+calc_diff.o:calc_diff.c vsubsum.h
+	$(CC) -c -fPIC calc_diff.c
+calc_sum.o: calc_sum.c vsubsum.h
+	$(CC) -c -fPIC calc_sum.c
+calc_max.o: calc_max.c vsubsum.h
+	$(CC) -c -fPIC calc_max.c
+calc_min.o:calc_min.c vsubsum.h
+	$(CC) -c -fPIC calc_min.c
+
+
