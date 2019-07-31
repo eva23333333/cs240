@@ -1,0 +1,71 @@
+#include "vsubsum.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+double calc_max(double *, int);
+double calc_min(double *, int);
+void calc_diff(double *, double *, int);
+void calc_sum(double *, double *, int);
+int read_vecs(double *, double *, int *);
+//declare C:difference  D:sum  as global
+double C[MAXSZ];
+double D[MAXSZ];
+FILE *f1;
+FILE *f2;
+double min=0;
+double max=0;
+
+void main() {
+double A[MAXSZ];
+double B[MAXSZ];
+int vecdim;
+int i;
+int r;
+  f1 = fopen("vectors_in.dat","r");
+  if(f1 == NULL) {
+	fprintf(stderr,"file  does not exist\n");
+	exit(1);
+  }
+   f2 = fopen("vectors_in.dat","w");
+  if(f2 == NULL) {
+        fprintf(stderr,"file  does not exist\n");
+        exit(1);
+  }     
+
+  fscanf(f1,"%d",&vecdim);
+  for( i=0;i<vecdim;i++){
+ r=read_vecs((A+i),(B+i),i);
+  }
+
+  if(r==-1){
+
+fprintf(stderr,"wrong input");
+
+printf("\n");
+
+exit(1);
+
+}
+
+for(i=0;i<vecdim;i++){
+calc_diff((A+i),(B+i),i);
+
+calc_sum((A+i),(B+i),i);
+}
+
+for(i=0;i<vecdim;i++){
+fprintf(f2,"%lf ",C[i]);
+
+}
+fprintf(f2,"\n");
+
+for(i=0;i<vecdim;i++){
+fprintf(f2,"%lf",D[i]);
+
+}
+
+fprintf(f2,"\n");
+fprintf(f2,"%lf \n",calc_max(A,vecdim));
+fprintf(f2,"%lf  \n",calc_min(B,vecdim)); 
+
+}

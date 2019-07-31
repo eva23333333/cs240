@@ -1,0 +1,16 @@
+CreateAppProcess(2)                    Linux Programmer's Manual        CreateAppProcess(2)
+
+NAME
+       CreateAppProcess - combines the tasks carried out by fork() and execv() when used to spawn a child process that executes a binary specified in the argument that may contain command-line arguments.
+
+SYNOPSIS
+      #include <sys/types.h>  
+      #include <stdio.h> 
+      #include <stdlib.h>
+      #include <unistd.h>
+      #include <string.h>
+       pid_t fork(void);
+
+DESCRIPTION
+       CreateAppProcess() takes as argument the name of an executable binary with command-line arguments, forks a child process, and executes the requested binary using execv() in the child. 
+
